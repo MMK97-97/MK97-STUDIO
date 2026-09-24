@@ -15,20 +15,44 @@ function push(){history.push(clone(state));if(history.length>40)history.shift();
 function undo(){if(!history.length)return;future.push(clone(state));state=history.pop();syncAll()}
 function redo(){if(!future.length)return;history.push(clone(state));state=future.pop();syncAll()}
 function fontName(f){return /bebas/i.test(f)?'Impact':/playfair/i.test(f)?'Georgia':'Arial'}
+function cricketArtwork(t){
+ const style=T.indexOf(t)%10,base=t.palette[0],second=t.palette[1],gold=t.palette[2];
+ const bx=style===2?85:style===4?1030:940,by=style===1?860:style===4?940:760;
+ // Vector artwork remains a separate layer that can be moved, edited, hidden, or replaced.
+ const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350">
+ <defs><radialGradient id="glow"><stop stop-color="${second}" stop-opacity=".88"/><stop offset="1" stop-color="${second}" stop-opacity="0"/></radialGradient>
+ <radialGradient id="ball" cx="29%" cy="25%" r="75%"><stop stop-color="#d88c59"/><stop offset=".57" stop-color="#81372a"/><stop offset="1" stop-color="#2b1217"/></radialGradient>
+ <pattern id="grain" width="13" height="13" patternUnits="userSpaceOnUse"><circle cx="2" cy="3" r=".8" fill="#fff" opacity=".14"/><path d="M0 12h13" stroke="#fff" stroke-opacity=".03"/></pattern>
+ <pattern id="stripes" width="135" height="135" patternUnits="userSpaceOnUse" patternTransform="skewX(-14)"><path d="M30 0v135M120 0v135" stroke="#fff" stroke-opacity=".055" stroke-width="2"/></pattern></defs>
+ <rect width="1080" height="1350" fill="${base}"/><ellipse cx="790" cy="670" rx="780" ry="800" fill="url(#glow)"/>
+ <rect width="1080" height="1350" fill="url(#stripes)"/><rect width="1080" height="1350" fill="url(#grain)"/>
+ <circle cx="${bx}" cy="${by}" r="310" fill="url(#ball)" opacity=".65"/>
+ <g fill="none" stroke="#ffe1b8" stroke-opacity=".52" stroke-width="3" stroke-dasharray="8 8"><path d="M${bx-50} ${by-300}C${bx+55} ${by-165} ${bx+55} ${by+170} ${bx-50} ${by+300}"/><path d="M${bx-25} ${by-300}C${bx+80} ${by-165} ${bx+80} ${by+170} ${bx-25} ${by+300}"/></g>
+ <circle cx="900" cy="835" r="575" fill="none" stroke="${gold}" stroke-opacity=".32" stroke-width="3"/>
+ <circle cx="900" cy="835" r="540" fill="none" stroke="${gold}" stroke-opacity=".10" stroke-width="2"/>
+ <path d="M35 1170H1045M35 40H1045M35 40V1310H1045V40" stroke="#fff" stroke-opacity=".28" stroke-width="2" fill="none"/>
+ <path d="M65 1195H1015" stroke="${gold}" stroke-opacity=".43" stroke-width="2"/></svg>`;
+ return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+}
 function defaultTemplate(t){
  state.templateId=t.id;state.bg=t.palette[0];
- const rgb=t.palette[0].replace('#','');const lightCanvas=(parseInt(rgb.slice(0,2),16)*299+parseInt(rgb.slice(2,4),16)*587+parseInt(rgb.slice(4,6),16)*114)/1000>170;
+ const accent=t.palette[2],lines=String(t.title).split('\n');
+ const font=fontName(t.font),fontSize=Math.min(165,t.titleSize||145,Math.floor(850/(Math.max(...lines.map(line=>line.length))*(font==='Georgia'?.7:.59))));
+ const headY=lines.length>2?520:570;
  state.layers=[
-  {id:uid(),type:'image',name:'MK97 background',src:'assets/MK97.png',x:100,y:225,w:880,h:880,opacity:lightCanvas?.14:.18,blend:lightCanvas?'multiply':'screen',invert:lightCanvas?0:100,visible:true,locked:false},
-  {id:uid(),type:'image',name:'League watermark',src:FWCWL_LOGO,x:260,y:285,w:590,h:590,opacity:lightCanvas?.16:.42,blend:lightCanvas?'multiply':'screen',brightness:155,contrast:115,visible:true,locked:false},
-  {id:uid(),type:'shape',name:'Accent',x:700,y:80,w:430,h:1350,color:t.palette[1],opacity:.86,rotation:-12,visible:true,locked:false},
-  {id:uid(),type:'image',name:'FWCWL logo',src:FWCWL_LOGO,x:825,y:85,w:170,h:170,opacity:1,blend:lightCanvas?'source-over':'screen',brightness:lightCanvas?125:155,contrast:115,visible:true,locked:false},
-  {id:uid(),type:'text',name:'Kicker',text:t.kicker,x:80,y:140,w:850,h:70,font:fontName(t.font),size:38,weight:800,color:t.kickerColor||t.palette[2],align:t.align||'left',opacity:1,rotation:0,visible:true,locked:false},
-  {id:uid(),type:'text',name:'Headline',text:t.title,x:80,y:520,w:880,h:390,font:fontName(t.font),size:Math.min(170,t.titleSize||130),weight:900,color:t.titleColor||'#fff',align:t.align||'left',opacity:1,rotation:0,visible:true,locked:false,stroke:'#000000',strokeWidth:0,shadow:18},
-  {id:uid(),type:'text',name:'Details',text:t.detail,x:80,y:1030,w:870,h:80,font:'Arial',size:34,weight:700,color:t.detailColor||'#d2d8dd',align:t.align||'left',opacity:1,rotation:0,visible:true,locked:false},
-  {id:uid(),type:'text',name:'Footer',text:t.cta||'FWCWL',x:80,y:1225,w:860,h:70,font:'Arial',size:28,weight:900,color:t.footerColor||t.palette[2],align:t.align||'left',opacity:1,rotation:0,visible:true,locked:false}
+  {id:uid(),type:'image',name:'Cricket texture and ball',src:cricketArtwork(t),x:0,y:0,w:1080,h:1350,opacity:1,visible:true,locked:false},
+  {id:uid(),type:'image',name:'MK97 background',src:'assets/MK97.png',x:745,y:875,w:265,h:265,opacity:.19,blend:'screen',invert:100,visible:true,locked:false},
+  {id:uid(),type:'image',name:'FWCWL crest background',src:FWCWL_LOGO,x:175,y:255,w:750,h:750,opacity:.68,blend:'screen',brightness:145,contrast:110,visible:true,locked:false},
+  {id:uid(),type:'image',name:'FWCWL logo',src:FWCWL_LOGO,x:60,y:65,w:145,h:145,opacity:1,blend:'screen',brightness:145,contrast:110,visible:true,locked:false},
+  {id:uid(),type:'text',name:'League name',text:'FWCWL',x:225,y:87,w:560,h:70,font:'Arial',size:52,weight:900,color:'#fff',align:'left',opacity:1,rotation:0,visible:true,locked:false},
+  {id:uid(),type:'text',name:'League subtitle',text:'FLORIDA WEST COAST\nWINTER LEAGUE',x:225,y:145,w:500,h:70,font:'Arial',size:23,weight:900,color:accent,align:'left',opacity:1,rotation:0,visible:true,locked:false},
+  {id:uid(),type:'text',name:'Kicker',text:t.kicker,x:65,y:440,w:930,h:65,font:'Arial',size:29,weight:900,color:t.kickerColor||accent,align:'left',opacity:1,rotation:0,visible:true,locked:false},
+  {id:uid(),type:'text',name:'Headline',text:t.title,x:65,y:headY,w:950,h:410,font,size:fontSize,weight:900,color:t.titleColor||'#fff',align:'left',opacity:1,rotation:0,shadow:7,visible:true,locked:false},
+  {id:uid(),type:'shape',name:'Headline underline',x:65,y:1010,w:120,h:9,color:accent,opacity:1,rotation:0,visible:true,locked:false},
+  {id:uid(),type:'text',name:'Details',text:t.detail,x:65,y:1035,w:950,h:80,font:'Arial',size:31,weight:800,color:t.detailColor||'#fff',align:'left',opacity:1,rotation:0,visible:true,locked:false},
+  {id:uid(),type:'text',name:'Footer',text:'FWCWL • CRICKET',x:65,y:1245,w:800,h:55,font:'Arial',size:25,weight:900,color:t.footerColor||accent,align:'left',opacity:1,rotation:0,visible:true,locked:false}
  ];
- state.selected=state.layers.find(l=>l.name==='Headline').id;syncAll();
+ state.selected=null;syncAll();
 }
 function selected(){return state.layers.find(x=>x.id===state.selected)||null}
 function getImage(src){if(imageCache.has(src))return imageCache.get(src);const im=new Image();im.onload=render;im.src=src;imageCache.set(src,im);return im}
