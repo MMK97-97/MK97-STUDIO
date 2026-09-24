@@ -16,50 +16,10 @@ function toast(msg){
 window.MK97={store,toast,templates:T,bump(k){const a=store.get('mk97.analytics',{templatesUsed:0,exports:0,projects:0,aiActions:0,videoEdits:0});a[k]=(a[k]||0)+1;store.set('mk97.analytics',a)}};
 function nav(){
  const active=document.body.dataset.nav||'';
- const icons={
-  home:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 10.7 12 3.7l8.5 7v9.1a1 1 0 0 1-1 1h-5v-6.3h-5v6.3h-5a1 1 0 0 1-1-1z"/></svg>',
-  templates:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>',
-  projects:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 7.3h6l1.7 2h9.3v9.3a1.5 1.5 0 0 1-1.5 1.5H5a1.5 1.5 0 0 1-1.5-1.5z"/><path d="M3.5 7.3V5.5A1.5 1.5 0 0 1 5 4h4.5l1.7 2h7.3a1.5 1.5 0 0 1 1.5 1.5v1.8"/></svg>',
-  more:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>'
- };
- const items=[
-  ['index.html',icons.home,'Home','home',''],
-  ['templates.html',icons.templates,'Templates','templates',''],
-  ['video-editor.html','＋','Create','create','create'],
-  ['projects.html',icons.projects,'Projects','projects',''],
-  ['more.html',icons.more,'Tools','more','']
- ];
- return `<nav class="bottomnav" aria-label="Primary navigation">${items.map(([h,i,l,k,c])=>`<a href="${h}" class="navitem ${active===k?'active':''} ${c}" ${c==='create'?'data-create-launcher="1"':''}><span class="nav-icon">${i}</span><b>${l}</b></a>`).join('')}</nav>`;
+ const items=[['index.html','⌂','Home','home',''],['templates.html','▦','Templates','templates',''],['poster-editor.html','＋','Create','create','create'],['projects.html','▧','Projects','projects',''],['more.html','☷','More','more','']];
+ return `<nav class="bottomnav">${items.map(([h,i,l,k,c])=>`<a href="${h}" class="navitem ${active===k?'active':''} ${c}"><span>${i}</span>${l}</a>`).join('')}</nav>`;
 }
 $$('[data-bottomnav]').forEach(x=>x.innerHTML=nav());
-
-// Mobile creator-app launcher and quiet page transitions.
-(function appShell(){
- const samePageLink=a=>{
-   try{const u=new URL(a.href,location.href);return u.origin===location.origin&&/\.html(?:$|[?#])/.test(u.pathname)}catch{return false}
- };
- const launcher=document.createElement('div');
- launcher.className='create-launcher';
- launcher.innerHTML=`<div class="create-launcher-backdrop" data-launch-close></div><section class="create-launcher-sheet" role="dialog" aria-label="Create new project"><div class="launcher-handle"></div><div class="launcher-head"><div><small>CREATE</small><h3>Start something new</h3></div><button type="button" class="launcher-close" data-launch-close>×</button></div><div class="launcher-grid"><a href="video-editor.html" class="launcher-card launcher-video"><span>▶</span><b>New video</b><small>Timeline editor</small></a><a href="poster-editor.html" class="launcher-card launcher-poster"><span>✎</span><b>New poster</b><small>Design editor</small></a><a href="media.html" class="launcher-card"><span>▣</span><b>Import media</b><small>Photos & assets</small></a><a href="templates.html" class="launcher-card"><span>▦</span><b>Templates</b><small>Start from a design</small></a></div></section>`;
- document.body.appendChild(launcher);
- const closeLauncher=()=>launcher.classList.remove('open');
- document.addEventListener('click',e=>{
-   const create=e.target.closest('[data-create-launcher]');
-   if(create){e.preventDefault();launcher.classList.add('open');return}
-   if(e.target.closest('[data-launch-close]')){closeLauncher();return}
-   const a=e.target.closest('a[href]');
-   if(!a||a.target==='_blank'||a.hasAttribute('download')||!samePageLink(a)||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
-   if(document.body.classList.contains('editor-page'))return;
-   e.preventDefault();
-   document.documentElement.classList.add('app-leaving');
-   setTimeout(()=>location.href=a.href,115);
- });
- window.addEventListener('pageshow',()=>{
-   document.documentElement.classList.remove('app-leaving');
-   requestAnimationFrame(()=>document.documentElement.classList.add('app-ready'));
- });
- document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLauncher()});
-})();
 function templateCard(t){
  return `<a class="template-card" href="template-detail.html?id=${encodeURIComponent(t.id)}">
   <div class="template-art" style="--a:${t.palette[0]};--b:${t.palette[1]};--accent:${t.palette[2]}">
@@ -115,16 +75,6 @@ if($('#aiUpload')){
 if($('#projectGrid')){
  const projects=store.get('mk97.projects',[]);
  $('#projectGrid').innerHTML=projects.length?projects.slice().reverse().map(p=>`<article class="project-card"><div class="template-art" style="--a:#07131b;--b:#402026;--accent:#f3c95b;aspect-ratio:4/3"><div class="template-copy"><span>${esc(p.type||'PROJECT')}</span><h3>${esc(p.name||'MK97 Project')}</h3><small>${esc(p.saved||'')}</small></div></div></article>`).join(''):`<div class="panel empty" style="grid-column:1/-1">No saved projects yet.<br><a href="poster-editor.html" class="gold-btn" style="margin-top:14px">Create a project</a></div>`;
-}
-if($('#homeProjectGrid')){
- const projects=store.get('mk97.projects',[]);
- const items=projects.slice(-4).reverse();
- const defaults=[
-  {type:'VIDEO',name:'New video',saved:'Start editing',href:'video-editor.html',tone:'video'},
-  {type:'POSTER',name:'New poster',saved:'Create a design',href:'poster-editor.html',tone:'poster'}
- ];
- const cards=(items.length?items:defaults).map((p,i)=>`<a class="home-project-card ${esc(p.tone||((p.type||'').toLowerCase()))}" href="${p.href||((p.type||'').toLowerCase().includes('video')?'video-editor.html':'poster-editor.html')}"><div class="project-thumb"><span>${(p.type||'PROJECT').toUpperCase()}</span><strong>${esc(p.name||'MK97 Project')}</strong></div><div class="project-info"><b>${esc(p.name||'MK97 Project')}</b><small>${esc(p.saved||'Saved locally')}</small></div></a>`).join('');
- $('#homeProjectGrid').innerHTML=cards;
 }
 if($('#analyticsMetrics')){
  const a=store.get('mk97.analytics',{templatesUsed:0,exports:0,projects:0,aiActions:0,videoEdits:0});

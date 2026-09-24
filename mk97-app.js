@@ -15,6 +15,7 @@
     const u=new URL(a.href,location.href); if(u.origin!==location.origin||u.pathname===location.pathname&&u.search===location.search)return;
     body.classList.add('leaving');
   });
+  document.addEventListener('click',e=>{const card=e.target.closest('a[data-template-id]');if(card)localStorage.setItem('mk97.selectedTemplate',JSON.stringify(card.dataset.templateId));});
   const recentKey='mk97_recent_projects_v2';
   const addRecent=(type,title,href)=>{let a=[];try{a=JSON.parse(localStorage.getItem(recentKey)||'[]')}catch{};a=[{type,title,href,ts:Date.now()},...a.filter(x=>x.href!==href)].slice(0,8);localStorage.setItem(recentKey,JSON.stringify(a));};
   if(location.pathname.endsWith('/poster.html')||location.pathname.endsWith('poster.html'))addRecent('POSTER','Poster project','poster.html');

@@ -1,0 +1,29 @@
+DELETE THESE LEGACY FILES FROM THE REPOSITORY ROOT
+==================================================
+They are NOT used by V25.1 and can cause confusion or stale deployments.
+
+- cricket-templates.js
+- editor-bridge.js
+- editor-premium.css
+- manifest.webmanifest
+- mk97-app.css
+- mk97-app.js
+- poster-pro.css
+- premium-cricket-templates.js
+- studio-data.js
+- studio.css
+- studio.js
+- styles.css
+- template-effects.js
+- template-preview.js
+- video-editor.css
+- video-effects.js
+- video-transitions.js
+- video.html
+
+Also remove any old files not present in this V25.1 ZIP, except files you intentionally maintain separately.
+
+DO NOT delete:
+- assets/
+- .nojekyll
+- sw.js (V25.1 cleanup worker)

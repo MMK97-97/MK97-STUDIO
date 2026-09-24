@@ -73,3 +73,24 @@ a{color:inherit;text-decoration:none}button,input{font:inherit}
 .ct-subject-3 .ct-ring,.ct-subject-7 .ct-ring,.ct-subject-8 .ct-ring{border-style:dashed}.ct-subject-4 .ct-ball{top:47%;width:42%}
 @media(max-width:760px){.cricket-template{padding:11px}.ct-main strong{font-size:clamp(25px,6.8vw,46px)}.ct-brand img{width:32px;height:32px}.ct-brand b{font-size:9px}.ct-brand small{font-size:4.3px}.ct-kicker,.ct-sub{font-size:6px}.ct-index{font-size:5px}.ct-style-4 .ct-main strong{font-size:clamp(23px,6vw,40px)}}
 @media(max-width:370px){.templateart.cricket-template{padding:9px}.ct-main strong{font-size:24px}.ct-brand{gap:5px}.ct-brand img{width:27px;height:27px}.ct-brand b{font-size:8px}.ct-brand small{font-size:3.8px}.ct-index{font-size:4.5px}.ct-style-4 .ct-main strong{font-size:22px}}
+
+/* FWCWL logo visibility in the cricket template artwork. */
+.cricket-template .ct-watermark{position:absolute;z-index:0;inset:16% 2% 12%;background:url("assets/fwcwl-logo.jpeg") center/contain no-repeat;mix-blend-mode:screen;opacity:.58;filter:brightness(1.48) contrast(1.1) saturate(1.18);pointer-events:none;mask-image:radial-gradient(ellipse 64% 65% at center,#000 55%,transparent 100%)}
+.cricket-template .ct-brand img{width:clamp(43px,4.7vw,60px);height:clamp(43px,4.7vw,60px);border:2px solid var(--shine);border-radius:12px;mix-blend-mode:screen;filter:brightness(1.55) contrast(1.08) saturate(1.2);box-shadow:0 0 0 2px rgba(0,0,0,.28),0 6px 18px rgba(0,0,0,.5)}
+.ct-style-5 .ct-watermark{mix-blend-mode:multiply;opacity:.23;filter:contrast(1.3) saturate(.65)}
+.ct-style-5 .ct-brand img{mix-blend-mode:normal;filter:brightness(1.28) contrast(1.06);border-color:#62493c}
+@media(max-width:760px){.cricket-template .ct-brand img{width:42px;height:42px}}
+@media(max-width:370px){.cricket-template .ct-brand img{width:35px;height:35px}}
+
+/* Each gallery card now reflects the palette and text of its actual editor preset. */
+.templatecard .templateart.cricket-template{--fg:var(--text-color,#fff);background:radial-gradient(circle at 76% 47%,var(--second) 0,transparent 57%),linear-gradient(135deg,var(--base),color-mix(in srgb,var(--base),#080b12 45%))}
+.cricket-template .ct-watermark{background-image:var(--fwcwl-logo)}
+.cricket-template.ct-long .ct-main strong{font-size:clamp(23px,2.8vw,43px)}
+@media(max-width:760px){.cricket-template.ct-long .ct-main strong{font-size:clamp(21px,5.2vw,35px)}}
+
+/* MK97 mark contrast and background presence. */
+.topbar .brand img,.drawbrand img{background:#f1e4cb;border:1px solid #c9a85f;padding:3px;box-shadow:0 0 0 1px rgba(244,211,143,.12),0 3px 12px rgba(0,0,0,.2)}
+.hero::before{content:"";position:absolute;right:2%;top:7%;width:34%;height:86%;background:url("assets/MK97.png") center/contain no-repeat;filter:brightness(0) invert(1);opacity:.11;pointer-events:none}
+.template-page .subhero{position:relative;isolation:isolate}
+.template-page .subhero::after{content:"";position:absolute;right:1%;top:-4px;width:110px;height:110px;background:url("assets/MK97.png") center/contain no-repeat;filter:brightness(0) invert(1);opacity:.18;pointer-events:none;z-index:-1}
+.cricket-template .ct-watermark::after{content:"";position:absolute;inset:9% 3%;background:url("assets/MK97.png") right center/45% auto no-repeat;filter:brightness(0) invert(1);opacity:.18;pointer-events:none}
