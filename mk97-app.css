@@ -48,6 +48,17 @@ a{color:inherit;text-decoration:none}button,input{font:inherit}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 .page-enter{animation:fadeIn .12s ease both}@keyframes fadeIn{from{opacity:.72}to{opacity:1}}
 
+/* Home entry: the logo and three direct workspaces. */
+.hero.home-entry{display:grid;grid-template-columns:minmax(0,1fr) minmax(330px,.86fr);gap:clamp(22px,4vw,70px);align-items:center;min-height:390px;padding:clamp(28px,4vw,54px);background:radial-gradient(circle at 8% 0%,rgba(203,165,98,.15),transparent 43%),linear-gradient(115deg,#17191a,#101517 57%,#111a1c)}
+.hero.home-entry::before{display:none}.hero.home-entry::after{right:-64px;top:-84px;width:270px;height:270px;opacity:.12}
+.entry-intro{position:relative;z-index:1}.entry-logo{width:124px;height:124px;padding:9px;border:1px solid rgba(243,212,152,.42);border-radius:27px;background:#f1e4cb;box-shadow:0 12px 38px rgba(0,0,0,.35),0 0 0 6px rgba(241,228,203,.035);margin-bottom:26px}.entry-logo img{display:block;width:100%;height:100%;object-fit:contain}
+.home-entry .eyebrow{color:#ebc98e;letter-spacing:.24em}.home-entry h1{font-size:clamp(34px,4.6vw,56px);max-width:570px;margin:12px 0 10px}.home-entry p{font-size:13px;margin:0;color:#aab5b5}
+.entry-actions{position:relative;z-index:1;display:grid;gap:12px}.entry-action{display:flex;align-items:center;gap:17px;min-height:82px;padding:14px 18px;border:1px solid rgba(255,255,255,.14);border-radius:18px;background:rgba(255,255,255,.045);transition:transform .16s ease,border-color .16s ease,background .16s ease}.entry-action:hover,.entry-action:focus-visible{transform:translateY(-2px);background:rgba(255,255,255,.09);border-color:rgba(237,205,151,.56);outline:none}
+.entry-action:first-child{border-color:rgba(105,227,213,.35);background:linear-gradient(90deg,rgba(74,216,202,.16),rgba(255,255,255,.035))}.entry-icon{display:grid;place-items:center;flex:none;width:50px;height:50px;border-radius:13px;background:#222b2c;color:#74e6d8;font-size:26px}.entry-action:nth-child(2) .entry-icon{color:#edc98a;background:#2d2923}.entry-action:nth-child(3) .entry-icon{color:#d5dce1;background:#262b30}
+.entry-action strong{display:block;font-size:17px}.entry-action small{display:block;margin-top:3px;color:#9aa7ac;font-size:11px}.entry-arrow{margin-left:auto;color:#a4b3b3;font-size:19px}
+@media(max-width:800px){.hero.home-entry{grid-template-columns:1fr;min-height:0;gap:24px;padding:26px}.entry-logo{width:105px;height:105px;margin-bottom:19px}.home-entry h1{font-size:clamp(35px,7vw,52px)}}
+@media(max-width:430px){.hero.home-entry{padding:22px 18px;gap:20px}.entry-logo{width:92px;height:92px;border-radius:21px;margin-bottom:16px}.entry-action{min-height:73px;padding:11px 13px;gap:12px}.entry-icon{width:44px;height:44px}.entry-action strong{font-size:15px}}
+
 
 /* FWCWL cricket poster previews. Scoped to the Templates page only. */
 .templateart.cricket-template{--shine:#f2ce8e;--fg:#fff5e8;--shade:#472018;isolation:isolate;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(11px,1.4vw,18px);color:var(--fg);box-shadow:inset 0 0 0 1px rgba(255,255,255,.11),0 12px 35px rgba(0,0,0,.18);background:radial-gradient(circle at 72% 50%,#8f5139 0,transparent 47%),linear-gradient(135deg,#5c2623,#21151a 70%,#100d13)}
