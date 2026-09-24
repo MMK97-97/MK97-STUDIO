@@ -1,6 +1,24 @@
 (()=>{
   const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
   const body=document.body;
+  const intro=$('#introSplash');
+  if(intro){
+    let finished=false;
+    const finishIntro=()=>{
+      if(finished)return;
+      finished=true;
+      try{sessionStorage.setItem('mk97_intro_seen','1')}catch(e){}
+      intro.classList.add('is-leaving');
+      window.setTimeout(()=>{intro.hidden=true;intro.setAttribute('aria-hidden','true')},440);
+    };
+    if(document.documentElement.classList.contains('intro-seen')||window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      intro.hidden=true;
+      intro.setAttribute('aria-hidden','true');
+    }else{
+      window.setTimeout(finishIntro,1850);
+      $('#introSkip')?.addEventListener('click',finishIntro);
+    }
+  }
   const drawer=$('#drawer'), sheet=$('#createSheet'), search=$('#searchPanel');
   const openDrawer=()=>drawer?.classList.add('open'), closeDrawer=()=>drawer?.classList.remove('open');
   const openSheet=()=>sheet?.classList.add('open'), closeSheet=()=>sheet?.classList.remove('open');
