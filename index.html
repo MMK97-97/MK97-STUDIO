@@ -1,88 +1,13 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#07080a">
-  <meta name="mk97-build" content="26.0">
-  <title>MK97 Creative Studio</title>
-  <link rel="stylesheet" href="app.css?v=26">
-</head>
-<body data-nav="home">
-<div class="page app-page">
-  <header class="topbar app-topbar">
-    <a class="brand" href="index.html" aria-label="MK97 Creative Studio home">
-      <span class="brand-logo"><img src="assets/MK97.png" alt="MK97"></span>
-      <span class="brand-copy"><b>MK97</b><small>CREATIVE STUDIO</small></span>
-    </a>
-    <div class="page-title">Create<small>VIDEO • POSTER • SOCIAL</small></div>
-    <div class="top-actions">
-      <a class="icon-btn" href="templates.html" aria-label="Search templates">⌕</a>
-      <a class="icon-btn" href="more.html" aria-label="More tools">•••</a>
-    </div>
-  </header>
-
-  <main class="shell main capcut-home">
-    <section class="create-project-card">
-      <div class="create-project-copy">
-        <div class="eyebrow">MK97 CREATIVE STUDIO</div>
-        <h1>Create something great.</h1>
-        <p>Start with a video, poster, template or your own media.</p>
-      </div>
-      <div class="create-project-actions">
-        <a class="new-project-main" href="video-editor.html"><span class="create-plus">＋</span><span><b>New project</b><small>Video editor</small></span></a>
-        <a class="new-project-secondary" href="poster-editor.html"><span>✎</span><span><b>New poster</b><small>Poster editor</small></span></a>
-      </div>
-    </section>
-
-    <section class="home-tools-section">
-      <div class="compact-section-head"><h2>Quick tools</h2></div>
-      <div class="quick-tools-row">
-        <a class="quick-tool" href="media.html"><span>▣</span><b>Media</b></a>
-        <a class="quick-tool" href="ai-tools.html"><span>✦</span><b>Cutout</b></a>
-        <a class="quick-tool" href="brand.html"><span>◇</span><b>Brand</b></a>
-        <a class="quick-tool" href="templates.html"><span>▦</span><b>Templates</b></a>
-        <a class="quick-tool" href="audio-tools.html"><span>♫</span><b>Audio</b></a>
-      </div>
-    </section>
-
-    <section class="home-section">
-      <div class="section-head app-section-head">
-        <div><h2>Recent projects</h2><p>Continue where you left off.</p></div>
-        <a href="projects.html">View all</a>
-      </div>
-      <div id="homeProjectGrid" class="home-project-grid"></div>
-    </section>
-
-    <section class="home-section">
-      <div class="section-head app-section-head">
-        <div><h2>Templates for you</h2><p>Ready-to-edit cricket designs.</p></div>
-        <a href="templates.html">See all</a>
-      </div>
-      <div class="template-grid home-template-grid" id="trendingTemplates"></div>
-    </section>
-
-    <section class="home-section creator-toolkit-section">
-      <div class="section-head app-section-head"><div><h2>Creator toolkit</h2><p>Fast access to your studio tools.</p></div></div>
-      <div class="tool-grid creator-toolkit-grid">
-        <a class="tool-card" href="motion-effects.html"><span class="tool-ico">✦</span><b>Effects</b><small>Motion and visual effects</small></a>
-        <a class="tool-card" href="text-editing.html"><span class="tool-ico">T</span><b>Text</b><small>Typography and titles</small></a>
-        <a class="tool-card" href="layers.html"><span class="tool-ico">☷</span><b>Layers</b><small>Arrange design objects</small></a>
-        <a class="tool-card" href="share.html"><span class="tool-ico">↗</span><b>Share</b><small>Export and publish</small></a>
-      </div>
-    </section>
-  </main>
-  <div data-bottomnav></div>
-</div>
-<script src="templates-data.js?v=26"></script>
-<script src="app.js?v=26"></script>
-<script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("./sw.js", { updateViaCache: "none" }).catch(() => {});
-}
-window.addEventListener("load", () => {
-  navigator.serviceWorker?.getRegistrations?.().then(regs => regs.forEach(r => r.update?.())).catch(() => {});
-});
-</script>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#050708"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>MK97 Creative Studio</title><link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="mk97-app.css"></head><body class="page-enter"><div class="app">
+<header class="topbar"><a class="brand" href="index.html"><img src="assets/MK97.png" onerror="this.src='https://mmk97-97.github.io/Instagram-Post-Maker/assets/MK97.png'" alt="MK97"><div class="brandtext"><div class="brandtitle">MK97</div><div class="brandsub">CREATIVE STUDIO</div></div></a><div class="topcenter"><b>Create</b><span>Video · Poster · Social</span></div><div class="topactions"><button class="iconbtn" id="searchBtn" aria-label="Search">⌕</button><button class="iconbtn" id="menuBtn" aria-label="Menu">•••</button></div></header>
+<main class="content"><div class="page">
+<section class="hero"><div class="eyebrow">MK97 Creative Studio</div><h1>Create something great.</h1><p>Start with a video, poster, template or your own media.</p><div class="hero-actions"><a class="launch primary" href="video.html"><span class="launch-icon">＋</span><span><strong>New project</strong><small>Video editor</small></span></a><a class="launch" href="poster.html"><span class="launch-icon">✎</span><span><strong>New poster</strong><small>Poster editor</small></span></a></div></section>
+<div class="sectionhead"><div><h2>Quick tools</h2></div></div><div class="toolgrid"><a class="tool" href="poster.html"><span class="glyph">▣</span><span>Media</span></a><a class="tool" href="poster.html"><span class="glyph">✦</span><span>Cutout</span></a><a class="tool" href="poster.html"><span class="glyph">◇</span><span>Brand</span></a><a class="tool" href="templates.html"><span class="glyph">▦</span><span>Templates</span></a><a class="tool" href="video.html"><span class="glyph">♫</span><span>Audio</span></a></div>
+<div class="sectionhead"><div><h2>Recent projects</h2><p>Continue where you left off.</p></div><a href="projects.html">View all</a></div><div class="recentrow" id="recentProjects"></div>
+<div class="sectionhead"><div><h2>Templates for you</h2><p>Ready-to-edit creative designs.</p></div><a href="templates.html">See all</a></div><div class="templategrid"><a class="templatecard" href="poster.html"><div class="templateart"><span class="probadge">PRO</span></div><div class="templatecopy"><strong>Match Day</strong><span>Social poster</span></div></a><a class="templatecard" href="poster.html"><div class="templateart"><span class="probadge">PRO</span></div><div class="templatecopy"><strong>Player Feature</strong><span>Portrait design</span></div></a><a class="templatecard" href="poster.html"><div class="templateart"><span class="probadge">PRO</span></div><div class="templatecopy"><strong>Result Card</strong><span>Match result</span></div></a><a class="templatecard" href="poster.html"><div class="templateart"><span class="probadge">PRO</span></div><div class="templatecopy"><strong>Fixture</strong><span>Schedule artwork</span></div></a></div>
+</div></main>
+<nav class="navbar"><a class="navitem active" href="index.html"><span class="ni">⌂</span><span>Home</span></a><a class="navitem" href="templates.html"><span class="ni">▦</span><span>Templates</span></a><button class="createfab createTrigger" aria-label="Create">＋</button><a class="navitem" href="projects.html"><span class="ni">□</span><span>Projects</span></a><a class="navitem" href="tools.html"><span class="ni">•••</span><span>Tools</span></a></nav>
+<div class="drawer" id="drawer"><div class="drawerback" id="drawerBack"></div><aside class="drawersheet"><div class="drawbrand"><img src="assets/MK97.png" onerror="this.src='https://mmk97-97.github.io/Instagram-Post-Maker/assets/MK97.png'" alt="MK97"><div><strong>MK97 Creative Studio</strong><span>CREATE · EDIT · EXPORT</span></div></div><a class="drawlink" href="index.html">⌂ Home</a><a class="drawlink" href="templates.html">▦ Templates</a><a class="drawlink" href="projects.html">□ Projects</a><a class="drawlink" href="poster.html">✎ Poster Studio</a><a class="drawlink" href="video.html">▷ Video Studio</a><a class="drawlink" href="tools.html">••• Tools</a><button class="drawlink installBtn" hidden style="border:0;background:transparent;color:inherit;text-align:left">＋ Install App</button><button class="drawlink" id="drawerClose" style="border:0;background:transparent;color:inherit;text-align:left">← Close</button><div class="drawfoot">MK97 Creative Studio<br>Original creative workspace with an app-first layout.</div></aside></div>
+<div class="sheet" id="createSheet"><div class="sheetback" id="sheetBack"></div><div class="sheetpanel"><div class="sheetgrab"></div><div class="sheettitle"><h3>Create new</h3><button class="sheetclose" id="sheetClose">×</button></div><div class="creategrid"><a class="createchoice" href="video.html"><span class="ccicon">＋</span><strong>Video project</strong><span>Start editing video</span></a><a class="createchoice" href="poster.html"><span class="ccicon">✎</span><strong>Poster design</strong><span>Create social artwork</span></a><a class="createchoice" href="poster.html"><span class="ccicon">▣</span><strong>Upload media</strong><span>Open media workspace</span></a><a class="createchoice" href="templates.html"><span class="ccicon">▦</span><strong>Use template</strong><span>Browse designs</span></a></div></div></div>
+<div class="searchpanel" id="searchPanel"><div class="searchwrap"><div class="searchbar"><input id="searchInput" placeholder="Search tools, templates, projects..."><button id="searchClose">Close</button></div><div class="searchresults" id="searchResults"></div></div></div>
+</div><script src="mk97-app.js"></script></body></html>
